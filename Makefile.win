@@ -1,0 +1,48 @@
+# Project: Game Pack
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe -D__DEBUG__
+CC   = gcc.exe -D__DEBUG__
+WINDRES = windres.exe
+RES  = Game_Pack_private.res
+OBJ  = main.o ping_pong.o miscfunc.o savecity.o pikachu.o tankwars.o $(RES)
+LINKOBJ  = main.o ping_pong.o miscfunc.o savecity.o pikachu.o tankwars.o $(RES)
+LIBS =  -mwindows -lalleg_s -lkernel32 -luser32 -lgdi32 -lcomdlg32 -lole32 -ldinput -lddraw -ldxguid -lwinmm -ldsound  -g3 
+INCS = 
+CXXINCS = 
+BIN  = "Game Pack.exe"
+CXXFLAGS = $(CXXINCS) -DALLEGRO_STATICLINK   -g3
+CFLAGS = $(INCS) -DALLEGRO_STATICLINK   -g3
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before "Game Pack.exe" all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "Game Pack.exe" $(LIBS)
+
+main.o: main.c
+	$(CC) -c main.c -o main.o $(CFLAGS)
+
+ping_pong.o: ping_pong.c
+	$(CC) -c ping_pong.c -o ping_pong.o $(CFLAGS)
+
+miscfunc.o: miscfunc.c
+	$(CC) -c miscfunc.c -o miscfunc.o $(CFLAGS)
+
+savecity.o: savecity.c
+	$(CC) -c savecity.c -o savecity.o $(CFLAGS)
+
+pikachu.o: pikachu.c
+	$(CC) -c pikachu.c -o pikachu.o $(CFLAGS)
+
+tankwars.o: tankwars.c
+	$(CC) -c tankwars.c -o tankwars.o $(CFLAGS)
+
+Game_Pack_private.res: Game_Pack_private.rc 
+	$(WINDRES) -i Game_Pack_private.rc --input-format=rc -o Game_Pack_private.res -O coff 
